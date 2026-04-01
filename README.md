@@ -1,5 +1,26 @@
 <img src="./shark.gif" />
 
+# Não me deixe morrer
+
+## Sobre
 Esse é meu primeiro tamagotchi, não é muito mas estou orgulhosa de ter feito do zero sem tutorial, "fazendo tudo sozinho sem ajuda de ninguém" (como diria o grandiossíssimo Gustavo hahahaha)
 
-Você só pode alimentar o Tamagotchi, com 10 de fome ele fica com fome e com 20 ele morre :)
+Você pode alimentar o tutu e fazê-lo descansar. Se a fome e o sono bater 0, ele morre :)
+
+Então, não deixe ele morrer!! >.<
+
+## Atualizações
+- Isolamento
+- Componentização
+- Melhoramento de performance
+
+## Tem que fazer (entre hj e a volta de Cristo)
+- [ ] Desenhar tutus com 4 humores diferentes
+  - [ ] Feliz
+  - [ ] Neutro
+  - [ ] Entediado
+  - [ ] Triste
+- [ ] Implementar lógica de humor (e garantir que não quebrou nada)
+- [ ] Melhorar interface de botões de ação
+- [ ] Melhorar interface da casa onde tá o tutu
+- [ ] Desenhar uma tartaruga marinha com canudo
