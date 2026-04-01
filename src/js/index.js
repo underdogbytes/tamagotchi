@@ -1,47 +1,39 @@
 import { TamagotchiUI } from './TamagotchiUI.js';
 import { createTamagotchi } from './factories.js';
 
-// Criando o tutu:
+//-------------------------------//
+// CRIANDO TAMAGOTCHI & UI
+//-------------------------------//
 const tutu = createTamagotchi('Sharkyyy', 'SHARK');
 const ui = new TamagotchiUI(tutu);
 
-// Outros elementos da tela:
+//-------------------------------//
+// ELEMENTOS DOM
+//-------------------------------//
 var domElements = {
+  btnIniciar: document.getElementById('btnIniciar'),
   btnActions: document.getElementById('btns-action'),
+  btnAlimentar: document.getElementById('btnAlimentar'),
+  btnDormir:  document.getElementById('btnDormir')
 }
 
-/**
- * ALIMENTAÇÃO
- * Se fome igual a zero, não permitir alimentar
- */
-document.getElementById('btnAlimentar').addEventListener('click', function () {
-  if (tutu.fome >= 0) {
-    tutu.alimentar(10);
-  } else {
-    // TODO: exibirEstadoTamagotchi('naoEstouComFome');
-  }
+//-------------------------------//
+// AÇÕES POR CLICK
+//-------------------------------//
+domElements.btnAlimentar.addEventListener('click', function () {
+  tutu.fome >= 10 ? tutu.alimentar(10) : ui.semFome();
 });
 
-/**
- * SONO
- * Se sono igual a zero, não permitir descansar
- */
-document.getElementById('btnDormir').addEventListener('click', function () {
-  if (tutu.sono >= 0) {
-    tutu.dormir(10);
-  } else {
-    // TODO: exibirEstadoTamagotchi('naoEstouComSono');
-  }
+domElements.btnDormir.addEventListener('click', function () {
+  tutu.sono >= 10 ? tutu.dormir(10) : ui.semSono();
 });
 
-/**
- * INICIALIZANDO O JOGO
- * 
- */
-var btnIniciar = document.getElementById('btnIniciar');
+//-------------------------------//
+// INICIANDO JOGO
+//-------------------------------//
 btnIniciar.addEventListener('click', function () {
   // Sumindo com o botão de iniciar:
-  btnIniciar.style.display = 'none';
+  domElements.btnIniciar.style.display = 'none';
 
   // Aparecendo a box do jogo:
   let tamagotchi__box = document.getElementById('tamagotchi__box');
