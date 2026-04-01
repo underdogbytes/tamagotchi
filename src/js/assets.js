@@ -22,6 +22,10 @@ export const assets = {
   },
   'fome_3': {
     imagem: 'src/img/creatures/shark-hammer/sad.png',
+    mensagem: 'Estou com fome!'
+  },
+  'fome_4': {
+    imagem: 'src/img/creatures/shark-hammer/sad.png',
     mensagem: 'Estou com MUITA fome!!!'
   },
   'sono_1': {
