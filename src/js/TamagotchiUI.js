@@ -2,61 +2,51 @@ import { assets, tamagotchiElement } from './assets.js';
 
 export class TamagotchiUI {
   constructor() {
+    this.els = {
+      fome: document.getElementById('alimentacao'),
+      sono: document.getElementById('sono'),
+      estados: document.getElementById('estados'), // usado par debug
+      imagem: tamagotchiElement.imagem,
+      mensagem: tamagotchiElement.mensagem
+    };
   }
 
-  atualizarBarraStatus(tamagotchi) {
-    document.getElementById('alimentacao').innerHTML = tamagotchi.fome;
-    document.getElementById('sono').innerHTML = tamagotchi.sono;
+  #getChavePrioritaria(tamagotchi) {
+    const status = tamagotchi.status;
 
-    // Estados é só para debug, pode remover depois:
-    document.getElementById('estados').innerHTML = tamagotchi.status;
+    // 1. Prioridade máxima:
+    // Morte (aka morreu agorinha)
+    if (status.includes('morto')) return 'morto';
+
+    // 2. Prioridade secundária:
+    // Estados Críticos 4 ou 3 (exceto humor que é descrecente e até agr não mata o bicho)
+    const critico = status.find(s => (s.includes('_4') || s.includes('_3')) && !s.startsWith('humor_'));
+    if (critico) return critico;
+
+    // 3. Casos especiais:
+    // fome e sono moderados ao mesmo tempo
+    if (status.includes('fome_2') && status.includes('sono_2')) return 'chateado';
+
+    // 4. Retorna o primeiro estado relevante que encontrar (exceto humor por enquanto)
+    const moderado = status.find(s => s.includes('_2') && !s.startsWith('humor_'));
+    if (moderado) return moderado;
+
+    // 5. Default:
+    // É sobre isso e tá tudo bem
+    return 'vivo';
   }
-
+  
   renderizar(tamagotchi) {
-    this.atualizarBarraStatus(tamagotchi);
-    // Morreu agorinha:
-    if (tamagotchi.checaEstado('morto')) {
-      tamagotchiElement.imagem.src = assets['morto'].imagem;
-      tamagotchiElement.mensagem.innerHTML = assets['morto'].mensagem;
-    } else if 
-    // Na paz de Cristo:
-    (tamagotchi.checaEstado('sono_1') && tamagotchi.checaEstado('fome_1')) {
-      tamagotchiElement.imagem.src = assets['vivo'].imagem;
-      tamagotchiElement.mensagem.innerHTML = assets['vivo'].mensagem;
-    } else if
-    // Sem sono, mas com fome:
-    (tamagotchi.checaEstado('sono_1')) {
-      if (tamagotchi.checaEstado('fome_2')) {
-        tamagotchiElement.imagem.src = assets['fome_2'].imagem;
-        tamagotchiElement.mensagem.innerHTML = assets['fome_2'].mensagem;
-      }
-      if (tamagotchi.checaEstado('fome_3')) {
-        tamagotchiElement.imagem.src = assets['fome_3'].imagem;
-        tamagotchiElement.mensagem.innerHTML = assets['fome_3'].mensagem;
-      }
-    } else if
-    // Com sono, mas sem fome:
-    (tamagotchi.checaEstado('fome_1')) {
-      if (tamagotchi.checaEstado('sono_2')) {
-        tamagotchiElement.imagem.src = assets['sono_2'].imagem;
-        tamagotchiElement.mensagem.innerHTML = assets['sono_2'].mensagem;
-      }
+    // Atualizando os dados de fome, sono e estados:
+    this.els.fome.textContent = tamagotchi.fome;
+    this.els.sono.textContent = tamagotchi.sono;
+    this.els.estados.textContent = tamagotchi.status.join(', ');
 
-      if (tamagotchi.checaEstado('sono_3')) {
-        tamagotchiElement.imagem.src = assets['sono_3'].imagem;
-        tamagotchiElement.mensagem.innerHTML = assets['sono_3'].mensagem;
-      }
-
-      if (tamagotchi.checaEstado('sono_4')) {
-        tamagotchiElement.imagem.src = assets['sono_4'].imagem;
-        tamagotchiElement.mensagem.innerHTML = assets['sono_4'].mensagem;
-      }
-    } else
-    // Com sono e com fome:
-    {
-      tamagotchiElement.imagem.src = 'src/img/creatures/shark-hammer/babado.png';
-      tamagotchiElement.mensagem.innerHTML = 'Você foi comprar um cigarro não foi?';
-    }
+    // Atualizando UI pelas chaves:
+    const chave = this.#getChavePrioritaria(tamagotchi);
+    const asset = assets[chave] || assets['vivo'];
+    this.els.imagem.src = asset.imagem;
+    this.els.mensagem.textContent = asset.mensagem;
   }
 
   semFome() {

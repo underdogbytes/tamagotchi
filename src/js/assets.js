@@ -8,6 +8,10 @@ export const assets = {
     imagem: 'src/img/creatures/shark-hammer/happy.png',
     mensagem: ':)'
   },
+  'chateado': {
+    imagem: 'src/img/creatures/shark-hammer/bored.png',
+    mensagem: ':|'
+  },
   'fome_1': {
     imagem: 'src/img/creatures/shark-hammer/happy.png',
     mensagem: 'Não estou com fome, obrigado!'
