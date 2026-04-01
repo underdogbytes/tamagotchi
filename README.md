@@ -9,6 +9,13 @@ Você pode alimentar o tutu e fazê-lo descansar. Se a fome e o sono bater 0, el
 
 Então, não deixe ele morrer!! >.<
 
+### Habilidades demonstradas:
+Além de ser legal, nesse projeto demonstro:
+- <b>Domínio de POO</b>: Uso de classes, encapsulamento (#) e herança.
+- <b>Clean Code:</b> Lógica declarativa em vez de milhares de if/else.
+- <b>Arquitetura:</b> Separação clara entre Lógica de Negócio e Interface (UI).
+- <b>Modernidade:</b> Uso de ES Modules e Factory Functions.
+
 ## Atualizações
 <i>Última atualização: 31/03/2026</i>
 
