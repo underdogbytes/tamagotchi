@@ -1,6 +1,8 @@
 import { assets, tamagotchiElement } from './assets.js';
 
 export class TamagotchiUI {
+  #ultimaChave = null;
+
   constructor() {
     this.els = {
       fome: document.getElementById('alimentacao'),
@@ -43,10 +45,15 @@ export class TamagotchiUI {
     this.els.estados.textContent = tamagotchi.status.join(', ');
 
     // Atualizando UI pelas chaves:
-    const chave = this.#getChavePrioritaria(tamagotchi);
-    const asset = assets[chave] || assets['vivo'];
-    this.els.imagem.src = asset.imagem;
-    this.els.mensagem.textContent = asset.mensagem;
+    const chaveAtual = this.#getChavePrioritaria(tamagotchi);
+
+    if (chaveAtual !== this.#ultimaChave) {
+      const asset = assets[chaveAtual] || assets['vivo'];
+      this.els.imagem.src = asset.imagem;
+      this.els.mensagem.textContent = asset.mensagem;
+
+      this.#ultimaChave = chaveAtual;
+    }
   }
 
   semFome() {
