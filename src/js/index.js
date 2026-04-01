@@ -28,6 +28,25 @@ domElements.btnDormir.addEventListener('click', function () {
   tutu.sono >= 10 ? tutu.dormir(10) : ui.semSono();
 });
 
+let jogoLoop = null;
+function comecarJogo() {
+  if(jogoLoop) clearInterval(jogoLoop);
+
+  jogoLoop = setInterval(() => {
+    tutu.viver();
+    ui.renderizar(tutu);
+
+    if (tutu.status.includes('morto')) {
+      pararJogo();
+    }
+  }, 1000);
+}
+
+function pararJogo() {
+  clearInterval(jogoLoop);
+  jogoLoop = null;
+}
+
 //-------------------------------//
 // INICIANDO JOGO
 //-------------------------------//
@@ -41,9 +60,5 @@ btnIniciar.addEventListener('click', function () {
 
   // Aparecendo a box de botões de ação:
   domElements.btnActions.style.display = 'block';
+  comecarJogo();
 });
-
-setInterval(() => {
-  tutu.viver();
-  ui.renderizar(tutu);
-}, 1000);
