@@ -10,9 +10,11 @@ Você pode alimentar o tutu e fazê-lo descansar. Se a fome e o sono bater 0, el
 Então, não deixe ele morrer!! >.<
 
 ## Atualizações
-- Isolamento
-- Componentização
-- Melhoramento de performance
+<i>Última atualização: 31/03/2026</i>
+
+- Performance melhorada;
+- Refatoração com foco em POO, Arquitetura e Clean Codeç
+- Correção de bug de não finalizar o jogo após morrer.
 
 ## Tem que fazer (entre hj e a volta de Cristo)
 - [ ] Desenhar tutus com 4 humores diferentes
